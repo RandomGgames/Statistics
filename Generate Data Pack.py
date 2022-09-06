@@ -2,23 +2,28 @@ import json
 import os
 import shutil
 
-if os.path.exists("Statistics"): shutil.rmtree("Statistics")
+if os.path.exists("data"): shutil.rmtree("data")
 
 directories = [
-	"Statistics/data/minecraft/tags/functions",
-	"Statistics/data/statistics/functions",
-	"Statistics/data/disable/functions",
+	"data/minecraft/tags/functions",
+	"data/statistics/functions",
+	"data/disable/functions",
 	]
 for folder in directories:
 	if not os.path.exists(folder):
 		os.makedirs(folder)
 
-with open("Statistics/pack.mcmeta", "w") as f: json.dump({"pack": {"pack_format": 10,"description": "RandomGgames' Statistics Data Pack"}}, f, indent = "\t")
-with open("Statistics/data/minecraft/tags/functions/load.json", "w") as f: json.dump({"values": ["statistics:load"]}, f, indent = "\t")
-with open("Statistics/data/statistics/functions/load.mcfunction", "w") as f: f.write(f"function statistics:create_objectives")
-add_objective = open("Statistics/data/statistics/functions/create_objectives.mcfunction", "a")
-remove_objective = open("Statistics/data/statistics/functions/remove_objectives.mcfunction", "a")
-with open("Statistics/data/disable/functions/statistics.mcfunction", "w") as f: f.write(f"function statistics:remove_objectives\n\ndatapack disable \"file/Statistics\"\ndatapack disable \"file/Statistics.zip\"")
+with open("pack.mcmeta", "w") as f: json.dump({"pack": {"pack_format": 10,"description": "RandomGgames' Statistics Data Pack"}}, f, indent = "\t")
+with open("data/minecraft/tags/functions/load.json", "w") as f: json.dump({"values": ["statistics:load"]}, f, indent = "\t")
+with open("data/statistics/functions/load.mcfunction", "w") as f: f.write(f"function statistics:create_objectives")
+
+with open("data/statistics/functions/create_objectives.mcfunction", "w") as f: f.write("")
+add_objective = open("data/statistics/functions/create_objectives.mcfunction", "a")
+
+with open("data/statistics/functions/remove_objectives.mcfunction", "w") as f: f.write("")
+remove_objective = open("data/statistics/functions/remove_objectives.mcfunction", "a")
+
+with open("data/disable/functions/statistics.mcfunction", "w") as f: f.write(f"function statistics:remove_objectives\n\ndatapack disable \"file/Statistics\"\ndatapack disable \"file/Statistics.zip\"")
 
 with open("Statistics.txt", "r") as f: data = f.read()
 data = data.split("\n")
